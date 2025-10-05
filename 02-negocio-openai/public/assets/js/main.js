@@ -1,6 +1,7 @@
 const sendButton = document.querySelector("#sendButton");
 const inputText = document.querySelector("#inputText");
 const messagesContainer = document.querySelector(".chat__messages");
+const userId = 
 
 const sendMessage = async () => {
   //sacar el valor del input
@@ -19,7 +20,9 @@ const sendMessage = async () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ message: myMessage }),
+      body: JSON.stringify({ 
+        userId,
+        message: myMessage }),
     });
     // Incrustar mensaje del bot en el chat
     const data = await response.json();
