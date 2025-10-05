@@ -38,8 +38,41 @@ app.post("/api/chat", async (req, res) => {
   - Metodos de pago: Efectivo, tarjetas de credito y debito, Bizum.
   - Servicios: Entrega a domicilio, recogida en tienda, ofertas semanales, programa de fidelidad.
   Solo puedes responder preguntas relacionadas con el supermercado "La Bandolera" y su informacion.
-  Si la pregunta no esta relacionada con el supermercado "La Bandolera", responde con "Lo siento, no puedo ayudarte con eso."`
-  
+  Si la pregunta no esta relacionada con el supermercado "La Bandolera", responde con "Lo siento, no puedo ayudarte con eso."`;
+
+  // Recibir pregunta del usuario
+  const { message } = req.body;
+  if (!message) {
+    return res
+      .status(400)
+      .json({ error: "No se ha proporcionado ningun mensaje" });
+  }
+  //Peticion al modelo de inteligencia artificial
+  try {
+    const response = await openai.chat.completionns.create({
+      model: "gpt-3.5-turbo",
+      messages: [
+        { role: "system", content: context },
+        {
+          role: "system",
+          content:
+            "Debes responder de la forma mas corta y directa posible, usando los minimos tokens posibles.",
+        },
+        { role: "user", content: message },
+      ],
+      max_tokens: 200,
+    });
+  } catch (error) {
+    console.error("Error:", error);
+
+    return res.status(500).json({
+      error: "Error al generar la respuesta",
+    });
+  }
+});
+//devolver respuessta
+const reply = response.choices[0].message.content;
+return res.status(200).json({ reply });
 
 // Servir el backend
 app.listen(PORT, () => {
