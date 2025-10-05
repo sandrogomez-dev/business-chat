@@ -33,7 +33,7 @@ app.post("/api/chat", async (req, res) => {
   Informacion del negocio: 
   - Ubicacion: Avenida Juan Carlos I, 15, 41013 Sevilla
   - Horario: Lunes a Sabado de 9:00 a 21:00, Domingos de 10:00 a 16:00
-  - Productos: Alimentos frescos, productos de limpieza, bebidas, snacks, productos de higiene personal, etc.
+  - Productos: Alimentos frescos, productos de limpieza, bebidas, snacks, productos de higiene personal, solo tenemos estos productos,ninguno mas.).
   - Marcas : Marca blanca "La Bandolera", Coca-Cola, Nestle, Colgate, etc.
   - Metodos de pago: Efectivo, tarjetas de credito y debito, Bizum.
   - Servicios: Entrega a domicilio, recogida en tienda, ofertas semanales, programa de fidelidad.
